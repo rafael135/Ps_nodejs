@@ -7,4 +7,10 @@ export const en = {
   AUTHORIZATION_NOT_FOUND: "Authorization not found",
   TOKEN_NOT_FOUND: "Token not found",
   ERROR_TO_SAVE_FILE: "error to save file",
+  FILE_SIZE_LIMIT_EXCEEDED: "The file is too large. Maximum size is 5MB.",
+  FILE_REQUIRED: "File is required",
+  FOLDER_NAME_REQUIRED: "Folder name is required",
+  FOLDER_ALREADY_EXISTS: "Folder already exists",
+  FOLDER_NOT_FOUND: "Folder not found",
+  FILE_NOT_FOUND: "File not found",
 };

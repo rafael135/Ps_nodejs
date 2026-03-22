@@ -30,4 +30,34 @@ routes.get(
   HttpExpressAdapter.execute(fileController.list.bind(fileController))
 );
 
+routes.patch(
+  "/files/:id/move",
+  authMiddleware.execute,
+  HttpExpressAdapter.execute(fileController.moveFile.bind(fileController))
+);
+
+routes.get(
+  "/folders",
+  authMiddleware.execute,
+  HttpExpressAdapter.execute(fileController.listFolders.bind(fileController))
+);
+
+routes.post(
+  "/folders",
+  authMiddleware.execute,
+  HttpExpressAdapter.execute(fileController.createFolder.bind(fileController))
+);
+
+routes.patch(
+  "/folders/rename",
+  authMiddleware.execute,
+  HttpExpressAdapter.execute(fileController.renameFolder.bind(fileController))
+);
+
+routes.delete(
+  "/folders/:name",
+  authMiddleware.execute,
+  HttpExpressAdapter.execute(fileController.deleteFolder.bind(fileController))
+);
+
 export default routes;
