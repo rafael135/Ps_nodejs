@@ -8,6 +8,12 @@ export class File {
   @Column({ type: "varchar" })
   fileName: string;
 
+  @Column({ type: "varchar" })
+  mimeType: string;
+
+  @Column({ type: "varchar", nullable: true })
+  folderPath: string;
+
   @Column({ type: "integer" })
   userId: number;
 }
