@@ -6,6 +6,7 @@ import { FolderRepository } from "../repositories/folderRepository";
 import { getConstants } from "../constants";
 import { promises as fs } from "fs";
 import path from "path";
+import { DeleteFileUseCase } from "../use-cases/file/deleteFile/deleteFileUseCase";
 
 type FileTypeFilter = "image" | "document" | "other";
 
@@ -13,6 +14,7 @@ class FileController {
   constructor(
     private readonly uploadFileUseCase: UploadFileUseCase,
     private readonly retriveFileUseCase: RetriveFileUseCase,
+    private readonly deleteFileUseCase: DeleteFileUseCase,
     private readonly fileRepository: FileRepository,
     private readonly folderRepository: FolderRepository
   ) {}
@@ -179,6 +181,29 @@ class FileController {
 
     return res.status(200).send();
   }
+
+  public async deleteFile(req: Request, res: Response) {
+    const userId = Number(req.headers.user);
+    const fileId = Number(req.params.id);
+
+    if (!fileId) {
+      return res.status(400).send({ message: getConstants().INCORRECT_PAYLOAD });
+    }
+
+    const deletedFile = await this.deleteFileUseCase.execute({ fileId, userId });
+
+    if (!deletedFile) {
+      return res.status(404).send({ message: getConstants().FILE_NOT_FOUND });
+    }
+
+    const filePath = path.resolve("uploads", deletedFile.fileName);
+    try {
+      await fs.unlink(filePath);
+    } catch (error) {
+    }
+
+    return res.status(200).send({ file: deletedFile });
+  }
 }
 
 const fileRepository = new FileRepository();
@@ -186,6 +211,7 @@ const fileRepository = new FileRepository();
 export const fileController = new FileController(
   new UploadFileUseCase(fileRepository),
   new RetriveFileUseCase(fileRepository),
+  new DeleteFileUseCase(fileRepository),
   fileRepository,
   new FolderRepository()
 );

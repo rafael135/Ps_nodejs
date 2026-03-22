@@ -7,6 +7,7 @@ export const pt = {
   AUTHORIZATION_NOT_FOUND: "Authorização não encontrada",
   TOKEN_NOT_FOUND: "Token não encontrado",
   ERROR_TO_SAVE_FILE: "erro ao salvar o arquivo",
+  ERROR_TO_DELETE_FILE: "erro ao excluir o arquivo",
   FILE_SIZE_LIMIT_EXCEEDED: "O arquivo é muito grande. O tamanho máximo é 5MB.",
   FILE_REQUIRED: "Arquivo é obrigatório",
   FOLDER_NAME_REQUIRED: "Nome da pasta é obrigatório",

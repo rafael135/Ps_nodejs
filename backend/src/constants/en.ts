@@ -7,6 +7,7 @@ export const en = {
   AUTHORIZATION_NOT_FOUND: "Authorization not found",
   TOKEN_NOT_FOUND: "Token not found",
   ERROR_TO_SAVE_FILE: "error to save file",
+  ERROR_TO_DELETE_FILE: "error to delete file",
   FILE_SIZE_LIMIT_EXCEEDED: "The file is too large. Maximum size is 5MB.",
   FILE_REQUIRED: "File is required",
   FOLDER_NAME_REQUIRED: "Folder name is required",

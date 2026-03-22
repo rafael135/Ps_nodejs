@@ -30,6 +30,12 @@ routes.get(
   HttpExpressAdapter.execute(fileController.list.bind(fileController))
 );
 
+routes.delete(
+  "/files/:id",
+  authMiddleware.execute,
+  HttpExpressAdapter.execute(fileController.deleteFile.bind(fileController))
+);
+
 routes.patch(
   "/files/:id/move",
   authMiddleware.execute,

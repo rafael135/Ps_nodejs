@@ -55,6 +55,18 @@ export class FileRepository {
     return (result.affected || 0) > 0;
   }
 
+  public async findById(userId: number, fileId: number): Promise<File | null> {
+    return this.fileRepository.findOneBy({ id: fileId, userId });
+  }
+
+  public async deleteById(userId: number, fileId: number): Promise<File | null> {
+    const file = await this.findById(userId, fileId);
+    if (!file) return null;
+
+    await this.fileRepository.delete({ id: fileId, userId });
+    return file;
+  }
+
   public async deleteByFolderPath(
     userId: number,
     folderPath: string
