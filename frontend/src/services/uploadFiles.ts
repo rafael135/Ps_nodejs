@@ -1,12 +1,16 @@
 import { getConstants } from "@/constants";
+import { StorageFileItem } from "@/types/storage";
 
-export const uploadFiles = async (file: any) => {
+export const uploadFiles = async (file: any, folderPath?: string | null) => {
   if (!file) throw Error("Files not Found");
 
   const { url } = getConstants();
 
   const formData = new FormData();
   formData.append("file", file);
+  if (folderPath) {
+    formData.append("folderPath", folderPath);
+  }
 
   const token = localStorage.getItem(getConstants().LOCAL_STORAGE_TOKEN);
 
@@ -22,5 +26,5 @@ export const uploadFiles = async (file: any) => {
 
   if (data.message) throw new Error(data.message);
 
-  return data.file;
+  return data.file as StorageFileItem;
 };
